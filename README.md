@@ -1,7 +1,7 @@
 # Laravel Passport client scopes restriction
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/denniseilander/laravel-passport-client-scopes.svg?style=flat-square)](https://packagist.org/packages/denniseilander/laravel-passport-client-scopes)
-[![Total Downloads](https://img.shields.io/packagist/dt/denniseilander/laravel-passport-client-scopes.svg?style=flat-square)](https://packagist.org/packages/denniseilander/laravel-passport-client-scopes)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/denniseilander/laravel-passport-scopes-restriction.svg?style=flat-square)](https://packagist.org/packages/denniseilander/laravel-passport-scopes-restriction)
+[![Total Downloads](https://img.shields.io/packagist/dt/denniseilander/laravel-passport-scopes-restriction.svg?style=flat-square)](https://packagist.org/packages/denniseilander/laravel-passport-scopes-restriction)
 
 This package allows you to limit the scopes a client can request.<br>
 By default, [Laravel Passport](https://laravel.com/docs/master/passport) doesn't support restricting scopes per client.
@@ -30,9 +30,7 @@ php artisan vendor:publish --provider="Denniseilander\PassportScopeRestriction\P
 
 ## Usage
 After running the migration, you may add specific scopes to each of your oauth_clients `allowed_scopes` column.
-Every scope added to the `allowed_scopes` column will be automatically assigned to the requested access tokens for that client.
-
-You may assign specific scopes the same way as they are assigned to the oauth_access_tokens `scopes` column:
+You can assign specific scopes the same way as they are assigned to the oauth_access_tokens `scopes` column:
 ```php
 // one scope
 ["read-users"]
@@ -40,6 +38,7 @@ You may assign specific scopes the same way as they are assigned to the oauth_ac
 // multiple scopes
 ["read-users","edit-users"]
 ```
+Every time an access token is requested for a specific client, the `allowed_scopes` will be added to the `scopes` column of that token.
 
 ## Syncing existing scopes with new allowed scopes
 Sometimes you have your `oauth_access_tokens` table filled with existing tokens and want to update the scopes
