@@ -14,7 +14,7 @@ you may want to limit the scopes a client can request.
 ## Installation
 You can install the package via composer:
 ```bash
-composer require denniseilander/laravel-passport-scopes-restrictions
+composer require denniseilander/laravel-passport-scopes-restriction
 ```
 
 You can publish and run the migrations with:
