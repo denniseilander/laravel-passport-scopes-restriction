@@ -1,0 +1,22 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class AddAllowedScopesColumnToOauthClientsTable extends Migration
+{
+    public function up()
+    {
+        Schema::table('oauth_clients', function (Blueprint $table) {
+            $table->text(config('passport-scopes.allowed_scopes_column'))->nullable()->after('provider');
+        });
+    }
+
+    public function down()
+    {
+        Schema::table('oauth_clients', function (Blueprint $table) {
+            $table->dropColumn(config('passport-scopes.allowed_scopes_column'));
+        });
+    }
+};
