@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) denniseilander <dennis.eilander@dij.digital>
+Copyright (c) denniseilander <eilander.dennis@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
