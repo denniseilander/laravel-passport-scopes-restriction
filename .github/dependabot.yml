@@ -3,7 +3,7 @@ updates:
 - package-ecosystem: composer
   directory: "/"
   schedule:
-    interval: weekly
+    interval: daily
   commit-message:
     prefix: "Composer"
   open-pull-requests-limit: 10
