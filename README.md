@@ -1,6 +1,6 @@
 # Laravel Passport client scopes restriction
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/denniseilander/laravel-passport-scopes-restriction.svg?style=flat-square)](https://packagist.org/packages/denniseilander/laravel-passport-scopes-restriction)
+![Packagist Version](https://img.shields.io/packagist/v/denniseilander/laravel-passport-scopes-restriction)
 [![Total Downloads](https://img.shields.io/packagist/dt/denniseilander/laravel-passport-scopes-restriction.svg?style=flat-square)](https://packagist.org/packages/denniseilander/laravel-passport-scopes-restriction)
 
 This package allows you to limit the scopes a client can request.<br>
@@ -39,6 +39,23 @@ You can assign specific scopes the same way as they are assigned to the oauth_ac
 ["read-users","edit-users"]
 ```
 Every time an access token is requested for a specific client, the `allowed_scopes` will be added to the `scopes` column of that token.
+
+You may also add an allowed scope within your `POST: passport/oauth` request, to specific assign a scope to that access_token:
+
+```php
+// The same scopes are defined in the allowed_scopes column of the oauth_clients table
+Passport::tokensCan([
+    'scope-1' => 'Scope 1',
+    'scope-2' => 'Scope 2',
+    'scope-3' => 'Scope 3',
+]);
+
+POST /oauth/token ?scope=scope-1
+```
+
+This will only assign `scope-1` to the access_token.
+
+You may leave the scope field empty, which will assign all allowed scopes to the access_token
 
 ## Syncing existing scopes with new allowed scopes
 Sometimes you have your `oauth_access_tokens` table filled with existing tokens and want to update the scopes
