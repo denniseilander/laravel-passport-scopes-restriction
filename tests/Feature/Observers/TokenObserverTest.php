@@ -33,6 +33,36 @@ class TokenObserverTest extends PassportTestCase
     /**
      * @test
      */
+    public function it_only_assigns_allowed_scopes_given_in_request(): void
+    {
+        Config::set('passport-scopes.enable_requesting_scopes', true);
+
+        Passport::tokensCan([
+            'scope-1' => 'Scope 1',
+            'scope-2' => 'Scope 2',
+            'scope-3' => 'Scope 3',
+        ]);
+
+        $client = ClientFactory::new()->asClientCredentials()->create([
+            config('passport-scopes.allowed_scopes_column') => '["scope-1", "scope-2", "scope-3"]',
+        ]);
+
+        $this->post('/oauth/token', [
+            'grant_type' => 'client_credentials',
+            'client_id' => $client->id,
+            'client_secret' => $client->secret,
+            'scope' => 'scope-3',
+        ]);
+
+        $this->assertDatabaseHas('oauth_access_tokens', [
+            'client_id' => $client->id,
+            'scopes' => '["scope-3"]',
+        ]);
+    }
+
+    /**
+     * @test
+     */
     public function it_doesnt_assign_scopes_when_allowed_scopes_is_null(): void
     {
         $client = ClientFactory::new()->asClientCredentials()->create([
@@ -48,6 +78,36 @@ class TokenObserverTest extends PassportTestCase
         $this->assertDatabaseHas('oauth_access_tokens', [
             'client_id' => $client->id,
             'scopes' => '[]',
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_ignores_scopes_in_request_when_this_option_is_disabled(): void
+    {
+        Config::set('passport-scopes.enable_requesting_scopes', false);
+
+        Passport::tokensCan([
+            'scope-1' => 'Scope 1',
+            'scope-2' => 'Scope 2',
+            'scope-3' => 'Scope 3',
+        ]);
+
+        $client = ClientFactory::new()->asClientCredentials()->create([
+            config('passport-scopes.allowed_scopes_column') => '["scope-1", "scope-2", "scope-3"]',
+        ]);
+
+        $this->post('/oauth/token', [
+            'grant_type' => 'client_credentials',
+            'client_id' => $client->id,
+            'client_secret' => $client->secret,
+            'scope' => 'scope-3',
+        ]);
+
+        $this->assertDatabaseHas('oauth_access_tokens', [
+            'client_id' => $client->id,
+            'scopes' => '["scope-1","scope-2","scope-3"]',
         ]);
     }
 
@@ -81,11 +141,10 @@ class TokenObserverTest extends PassportTestCase
     public function invalidScopesDataProvider(): array
     {
         return [
-            'invalid requested scope' => [
+            'invalid_requested_scope' => [
                 'config' => true,
                 'tokens_can' => [
                     'read-users' => 'Read users.',
-                    'delete-users' => 'Delete users.',
                 ],
                 'allowed_scopes' => '["read-users"]',
                 'requested_scopes' => 'read-users delete-users',
@@ -99,7 +158,7 @@ class TokenObserverTest extends PassportTestCase
                     ],
                 ],
             ],
-            'invalid application scope' => [
+            'invalid_application_scope' => [
                 'config' => false,
                 'tokens_can' => [
                     'read-users' => 'Read users.',

@@ -16,14 +16,14 @@ class TokenObserver
         $scopes = $token->scopes;
 
         if (config('passport-scopes.enable_requesting_scopes')) {
-            if ($invalidScopes = array_diff($scopes, $allowedScopes)) {
-                throw OAuthServerException::invalidScope(array_values($invalidScopes)[0]);
-            }
-
             $scopes = array_intersect($scopes, $allowedScopes);
+        } else {
+            $scopes = $allowedScopes;
         }
 
-        $scopes = array_unique(array_merge($allowedScopes, $scopes), SORT_REGULAR);
+        if (empty($scopes)) {
+            $scopes = array_unique(array_merge($allowedScopes, $scopes), SORT_REGULAR);
+        }
 
         $token->scopes = $scopes;
     }
