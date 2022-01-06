@@ -51,7 +51,7 @@ class TokenObserverTest extends PassportTestCase
             'grant_type' => 'client_credentials',
             'client_id' => $client->id,
             'client_secret' => $client->secret,
-            'scope' => 'scope-3'
+            'scope' => 'scope-3',
         ]);
 
         $this->assertDatabaseHas('oauth_access_tokens', [
@@ -102,7 +102,7 @@ class TokenObserverTest extends PassportTestCase
             'grant_type' => 'client_credentials',
             'client_id' => $client->id,
             'client_secret' => $client->secret,
-            'scope' => 'scope-3'
+            'scope' => 'scope-3',
         ]);
 
         $this->assertDatabaseHas('oauth_access_tokens', [
