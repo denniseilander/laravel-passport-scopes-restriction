@@ -7,18 +7,8 @@ use Denniseilander\PassportScopeRestriction\Models\Token;
 
 class TokenFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = Token::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
     public function definition(): array
     {
         return [

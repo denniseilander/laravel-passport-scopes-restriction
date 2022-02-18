@@ -22,11 +22,11 @@ class SyncClientScopesCommand extends Command
             ->query()
             ->has('tokens')
             ->each(function (Client $client) {
-                $this->info("Synchronizing {$client->tokens()->count()} access tokens of client $client->name");
+                $this->info("Synchronizing {$client->tokens->count()} access tokens of client $client->name");
 
                 $allowedScopes = $client->getAllowedScopes();
 
-                $client->tokens()->each(function (Token $token) use ($allowedScopes) {
+                $client->tokens->each(function (Token $token) use ($allowedScopes) {
                     $scopes = $token->scopes;
 
                     if (! $this->option('keep-existing-scopes')) {
