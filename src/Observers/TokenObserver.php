@@ -3,7 +3,6 @@
 namespace Denniseilander\PassportScopeRestriction\Observers;
 
 use Denniseilander\PassportScopeRestriction\Models\Token;
-use League\OAuth2\Server\Exception\OAuthServerException;
 
 class TokenObserver
 {
