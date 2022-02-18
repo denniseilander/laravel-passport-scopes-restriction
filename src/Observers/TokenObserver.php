@@ -7,9 +7,6 @@ use League\OAuth2\Server\Exception\OAuthServerException;
 
 class TokenObserver
 {
-    /**
-     * @throws OAuthServerException
-     */
     public function creating(Token $token): void
     {
         $allowedScopes = $token->client->getAllowedScopes();
