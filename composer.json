@@ -1,6 +1,6 @@
 {
     "name": "denniseilander/laravel-passport-scopes-restriction",
-    "description": "Restrict scopes for different clients.",
+    "description": "Restrict scopes for different Laravel Passport clients.",
     "keywords": [
         "denniseilander",
         "laravel",
@@ -11,25 +11,24 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Dennis",
+            "name": "Dennis Eilander",
             "email": "eilander.dennis@gmail.com",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^7.4|^8.0",
-        "spatie/laravel-package-tools": "^1.4.3",
-        "illuminate/contracts": "^8.37",
-        "laravel/passport": "^10.1",
+        "php": "^8.0",
+        "spatie/laravel-package-tools": "^1.9.2",
+        "illuminate/contracts": "^9.0",
+        "laravel/passport": "^10.3",
         "ext-json": "*"
     },
     "require-dev": {
-        "brianium/paratest": "^6.2",
-        "nunomaduro/collision": "^5.3",
-        "orchestra/testbench": "^6.15",
-        "phpunit/phpunit": "^9.3",
-        "spatie/laravel-ray": "^1.9",
-        "vimeo/psalm": "^4.4"
+        "nunomaduro/collision": "^6.0",
+        "nunomaduro/larastan": "^2.0.1",
+        "orchestra/testbench": "^7.0",
+        "phpunit/phpunit": "^9.5",
+        "spatie/laravel-ray": "^1.26"
     },
     "autoload": {
         "psr-4": {
@@ -43,7 +42,7 @@
         }
     },
     "scripts": {
-        "psalm": "vendor/bin/psalm",
+        "analyse": "vendor/bin/phpstan analyse",
         "test": "./vendor/bin/testbench package:test --parallel --no-coverage",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
     },
