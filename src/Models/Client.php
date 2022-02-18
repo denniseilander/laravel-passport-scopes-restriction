@@ -3,7 +3,6 @@
 namespace Denniseilander\PassportScopeRestriction\Models;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Passport\Client as PassportClient;
 
 /**
