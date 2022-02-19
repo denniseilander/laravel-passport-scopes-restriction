@@ -2,7 +2,13 @@
 
 All notable changes to `laravel-passport-scopes-restriction` will be documented in this file.
 
-## [Unreleased](https://github.com/denniseilander/laravel-passport-scopes-restriction/compare/1.0.0...HEAD)
+## [1.0.0](https://github.com/denniseilander/laravel-passport-scopes-restriction/compare/v0.1.4...1.0.0) - 2022-02-19
+
+## What's Changed
+
+- Add Laravel 9 support
+
+**Full Changelog**: https://github.com/denniseilander/laravel-passport-scopes-restriction/compare/v0.1.4...1.0.0
 
 ## 0.1.4 - 2022-01-06
 
@@ -11,11 +17,3 @@ All notable changes to `laravel-passport-scopes-restriction` will be documented 
 ## 0.1.0 - 2021-05-17
 
 - Initial release
-
-## [1.0.0](https://github.com/denniseilander/laravel-passport-scopes-restriction/compare/v0.1.4...1.0.0) - 2022-02-19
-
-## What's Changed
-
-- Add Laravel 9 support
-
-**Full Changelog**: https://github.com/denniseilander/laravel-passport-scopes-restriction/compare/v0.1.4...1.0.0
