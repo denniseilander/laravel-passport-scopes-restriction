@@ -2,6 +2,8 @@
 
 All notable changes to `laravel-passport-scopes-restriction` will be documented in this file.
 
+## [Unreleased](https://github.com/denniseilander/laravel-passport-scopes-restriction/compare/v0.1.4...HEAD)
+
 ## 0.1.4 - 2022-01-06
 
 - Fix: Only assign scopes to the access token which are sending within the request.
