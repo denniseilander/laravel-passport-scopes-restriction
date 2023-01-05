@@ -15,7 +15,6 @@ jobs:
         include:
           - laravel: 9.*
             testbench: 7.*
-            carbon: ^2.64
           - laravel: 8.*
             testbench: ^6.23
         exclude:
@@ -43,7 +42,7 @@ jobs:
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+          composer update --${{ matrix.stability }} --no-interaction
 
       - name: Execute tests
         run: vendor/bin/phpunit --coverage-clover coverage/coverage.xml
