@@ -13,9 +13,12 @@ jobs:
         laravel: [9.*, 8.*]
         stability: [prefer-lowest, prefer-stable]
         include:
+          - php: 8.2
+            laravel: 9.*
+            testbench: 7.*
+            stability: prefer-lowest
           - laravel: 9.*
             testbench: 7.*
-            stability: prefer-stable
           - laravel: 8.*
             testbench: ^6.23
         exclude:
