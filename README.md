@@ -2,7 +2,7 @@
 
 ![Packagist Version](https://img.shields.io/packagist/v/denniseilander/laravel-passport-scopes-restriction.svg?style=flat-square)
 ![PHP Version Support](https://img.shields.io/packagist/php-v/denniseilander/laravel-passport-scopes-restriction?style=flat-square)
-![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/denniseilander/laravel-passport-scopes-restriction/run-tests.yml?branch=master&label=Tests&style=flat-square)
+![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/denniseilander/laravel-passport-scopes-restriction/run-tests.yml?branch=master&label=tests&style=flat-square)
 [![Total Downloads](https://img.shields.io/packagist/dt/denniseilander/laravel-passport-scopes-restriction.svg?style=flat-square)](https://packagist.org/packages/denniseilander/laravel-passport-scopes-restriction)
 
 This package allows you to limit the scopes a client can request.<br>
