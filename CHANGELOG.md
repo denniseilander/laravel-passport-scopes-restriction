@@ -2,6 +2,13 @@
 
 All notable changes to `laravel-passport-scopes-restriction` will be documented in this file.
 
+## 2.0.0 - 2023-03-11
+
+### What's Changed
+
+- Drop PHP 7.4 and 8.0 and Laravel 8 and 9
+- Add support for Laravel 10
+
 ## [1.0.0](https://github.com/denniseilander/laravel-passport-scopes-restriction/compare/v0.1.4...1.0.0) - 2022-02-19
 
 ## What's Changed
