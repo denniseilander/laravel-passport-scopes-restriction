@@ -31,8 +31,6 @@ abstract class PassportTestCase extends TestCase
 
         (new \AddAllowedScopesColumnToOauthClientsTable())->up();
 
-        Passport::routes();
-
         @unlink(self::PUBLIC_KEY);
         @unlink(self::PRIVATE_KEY);
 
