@@ -5,7 +5,6 @@ namespace Denniseilander\PassportScopeRestriction\Tests\Feature;
 use Denniseilander\PassportScopeRestriction\PassportClientServiceProvider;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Laravel\Passport\Passport;
 use Laravel\Passport\PassportServiceProvider;
 use Orchestra\Testbench\TestCase;
 
