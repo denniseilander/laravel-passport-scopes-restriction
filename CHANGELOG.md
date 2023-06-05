@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-passport-scopes-restriction` will be documented in this file.
 
+## 2.1.0 - 2023-06-05
+
+### What's Changed
+
+- Add Laravel 9 support by @denniseilander in https://github.com/denniseilander/laravel-passport-scopes-restriction/pull/26
+
+**Full Changelog**: https://github.com/denniseilander/laravel-passport-scopes-restriction/compare/2.0.0...2.1.0
+
 ## 2.0.0 - 2023-03-11
 
 ### What's Changed
