@@ -138,7 +138,7 @@ class TokenObserverTest extends PassportTestCase
         ])->assertStatus($assertion['status'])->assertJson($assertion['json']);
     }
 
-    public function invalidScopesDataProvider(): array
+    public static function invalidScopesDataProvider(): array
     {
         return [
             'invalid_requested_scope' => [
