@@ -13,11 +13,12 @@ use Workbench\App\Models\User;
 
 abstract class PassportTestCase extends TestCase
 {
-    use LazilyRefreshDatabase, WithWorkbench;
+    use LazilyRefreshDatabase;
+    use WithWorkbench;
 
-    const KEYS = __DIR__.'/../keys';
-    const PUBLIC_KEY = self::KEYS.'/oauth-public.key';
-    const PRIVATE_KEY = self::KEYS.'/oauth-private.key';
+    public const KEYS = __DIR__.'/../keys';
+    public const PUBLIC_KEY = self::KEYS.'/oauth-public.key';
+    public const PRIVATE_KEY = self::KEYS.'/oauth-private.key';
 
     protected function setUp(): void
     {
