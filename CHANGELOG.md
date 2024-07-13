@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-passport-scopes-restriction` will be documented in this file.
 
+## 3.0.0 - 2024-07-13
+
+### What's Changed
+
+* [PSR-45] Drop Laravel 10 and add Laravel 11 support by @denniseilander in https://github.com/denniseilander/laravel-passport-scopes-restriction/pull/46
+
+**Full Changelog**: https://github.com/denniseilander/laravel-passport-scopes-restriction/compare/2.1.0...3.0.0
+
 ## 2.1.0 - 2023-06-05
 
 ### What's Changed
