@@ -6,9 +6,12 @@ use Denniseilander\PassportScopeRestriction\Tests\Feature\PassportTestCase;
 use Illuminate\Support\Facades\Config;
 use Laravel\Passport\Database\Factories\ClientFactory;
 use Laravel\Passport\Passport;
+use Orchestra\Testbench\Concerns\WithLaravelMigrations;
 
 class TokenObserverTest extends PassportTestCase
 {
+    use WithLaravelMigrations;
+
     /**
      * @test
      */
