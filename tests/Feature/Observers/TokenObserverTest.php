@@ -4,11 +4,15 @@ namespace Denniseilander\PassportScopeRestriction\Tests\Feature\Observers;
 
 use Denniseilander\PassportScopeRestriction\Tests\Feature\PassportTestCase;
 use Illuminate\Support\Facades\Config;
+use Laravel\Passport\Client;
 use Laravel\Passport\Database\Factories\ClientFactory;
 use Laravel\Passport\Passport;
+use Orchestra\Testbench\Concerns\WithLaravelMigrations;
 
 class TokenObserverTest extends PassportTestCase
 {
+    use WithLaravelMigrations;
+
     /**
      * @test
      */
@@ -43,7 +47,8 @@ class TokenObserverTest extends PassportTestCase
             'scope-3' => 'Scope 3',
         ]);
 
-        $client = ClientFactory::new()->asClientCredentials()->create([
+        /** @var Client $client */
+        $client = ClientFactory::new()->asClientCredentials()->createOne([
             config('passport-scopes.allowed_scopes_column') => '["scope-1", "scope-2", "scope-3"]',
         ]);
 
@@ -65,7 +70,8 @@ class TokenObserverTest extends PassportTestCase
      */
     public function it_doesnt_assign_scopes_when_allowed_scopes_is_null(): void
     {
-        $client = ClientFactory::new()->asClientCredentials()->create([
+        /** @var Client $client */
+        $client = ClientFactory::new()->asClientCredentials()->createOne([
             config('passport-scopes.allowed_scopes_column') => null,
         ]);
 
@@ -94,7 +100,8 @@ class TokenObserverTest extends PassportTestCase
             'scope-3' => 'Scope 3',
         ]);
 
-        $client = ClientFactory::new()->asClientCredentials()->create([
+        /** @var Client $client */
+        $client = ClientFactory::new()->asClientCredentials()->createOne([
             config('passport-scopes.allowed_scopes_column') => '["scope-1", "scope-2", "scope-3"]',
         ]);
 
@@ -117,28 +124,29 @@ class TokenObserverTest extends PassportTestCase
      */
     public function it_throws_exception_on_invalid_scopes(
         $config,
-        $tokensCan,
-        $allowedScopes,
-        $requestedScopes,
+        $tokens_can,
+        $allowed_scopes,
+        $requested_scopes,
         $assertion
     ): void {
         Config::set('passport-scopes.enable_requesting_scopes', $config);
 
-        Passport::tokensCan($tokensCan);
+        Passport::tokensCan($tokens_can);
 
-        $client = ClientFactory::new()->asClientCredentials()->create([
-            $this->allowed_scopes_column => $allowedScopes,
+        /** @var Client $client */
+        $client = ClientFactory::new()->asClientCredentials()->createOne([
+            config('passport-scopes.allowed_scopes_column') => $allowed_scopes,
         ]);
 
         $this->post('/oauth/token', [
             'grant_type' => 'client_credentials',
             'client_id' => $client->id,
             'client_secret' => $client->secret,
-            'scope' => $requestedScopes,
+            'scope' => $requested_scopes,
         ])->assertStatus($assertion['status'])->assertJson($assertion['json']);
     }
 
-    public function invalidScopesDataProvider(): array
+    public static function invalidScopesDataProvider(): array
     {
         return [
             'invalid_requested_scope' => [

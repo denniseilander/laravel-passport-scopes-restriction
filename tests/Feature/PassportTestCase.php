@@ -4,58 +4,53 @@ namespace Denniseilander\PassportScopeRestriction\Tests\Feature;
 
 use Denniseilander\PassportScopeRestriction\PassportClientServiceProvider;
 use Illuminate\Contracts\Config\Repository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Laravel\Passport\Passport;
 use Laravel\Passport\PassportServiceProvider;
+use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase;
+use Workbench\App\Models\User;
 
 abstract class PassportTestCase extends TestCase
 {
-    use RefreshDatabase;
+    use LazilyRefreshDatabase;
+    use WithWorkbench;
 
-    public const KEYS = __DIR__.'/keys';
+    public const KEYS = __DIR__.'/../keys';
     public const PUBLIC_KEY = self::KEYS.'/oauth-public.key';
     public const PRIVATE_KEY = self::KEYS.'/oauth-private.key';
 
-    public string $allowed_scopes_column;
-
-    public function setUp(): void
+    protected function setUp(): void
     {
+        $this->afterApplicationCreated(function () {
+            Passport::loadKeysFrom(self::KEYS);
+
+            @unlink(self::PUBLIC_KEY);
+            @unlink(self::PRIVATE_KEY);
+
+            $this->artisan('passport:keys');
+
+            // Run migrations
+            $this->runMigrations();
+        });
+
+        $this->beforeApplicationDestroyed(function () {
+            @unlink(self::PUBLIC_KEY);
+            @unlink(self::PRIVATE_KEY);
+        });
+
         parent::setUp();
-
-        $this->allowed_scopes_column = config('passport-scopes.allowed_scopes_column');
-
-        $this->artisan('migrate:fresh');
-
-        include_once __DIR__.'/../../database/migrations/add_allowed_scopes_column_to_oauth_clients_table.php.stub';
-
-        (new \AddAllowedScopesColumnToOauthClientsTable())->up();
-
-        @unlink(self::PUBLIC_KEY);
-        @unlink(self::PRIVATE_KEY);
-
-        $this->artisan('passport:keys');
     }
 
-    public function getEnvironmentSetUp($app): void
+    protected function defineEnvironment($app): void
     {
         $config = $app->make(Repository::class);
 
-        $config->set('auth.defaults.provider', 'users');
-
-        if (($userClass = $this->getUserClass()) !== null) {
-            $config->set('auth.providers.users.model', $userClass);
-        }
-
-        $config->set('auth.guards.api', ['driver' => 'passport', 'provider' => 'users']);
-
-        $app['config']->set('database.default', 'testbench');
-
-        $app['config']->set('passport.storage.database.connection', 'testbench');
-
-        $app['config']->set('database.connections.testbench', [
-            'driver' => 'sqlite',
-            'database' => ':memory:',
-            'prefix' => '',
+        $config->set([
+            'auth.defaults.provider' => 'users',
+            'auth.providers.users.model' => User::class,
+            'auth.guards.api' => ['driver' => 'passport', 'provider' => 'users'],
+            'database.default' => 'testing',
         ]);
     }
 
@@ -67,13 +62,15 @@ abstract class PassportTestCase extends TestCase
         ];
     }
 
-    /**
-     * Get the Eloquent user model class name.
-     *
-     * @return string|null
-     */
-    protected function getUserClass(): ?string
+    protected function runMigrations(): void
     {
-        return null;
+        // Load Passport's migrations if they have been published
+        if (file_exists(database_path('migrations'))) {
+            $this->loadMigrationsFrom(realpath(__DIR__.'/../../vendor/laravel/passport/database/migrations'));
+        }
+
+        // Manually include and run the migration that adds the allowed_scopes column
+        require_once __DIR__.'/../../database/migrations/add_allowed_scopes_column_to_oauth_clients_table.php.stub';
+        (new \AddAllowedScopesColumnToOauthClientsTable())->up();
     }
 }

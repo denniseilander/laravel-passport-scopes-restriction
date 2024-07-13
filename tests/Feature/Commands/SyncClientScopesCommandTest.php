@@ -19,8 +19,8 @@ class SyncClientScopesCommandTest extends PassportTestCase
         $clients = ClientFactory::new()
             ->count(2)
             ->state(new Sequence(
-                [$this->allowed_scopes_column => ['read-users']],
-                [$this->allowed_scopes_column => ['write-users','delete-users']],
+                [config('passport-scopes.allowed_scopes_column') => ['read-users']],
+                [config('passport-scopes.allowed_scopes_column') => ['write-users','delete-users']],
             ))
             ->asClientCredentials()
             ->create();
@@ -58,7 +58,7 @@ class SyncClientScopesCommandTest extends PassportTestCase
         $client = ClientFactory::new()
             ->asClientCredentials()
             ->create([
-                $this->allowed_scopes_column => ['read-users','delete-users'],
+                config('passport-scopes.allowed_scopes_column') => ['read-users','delete-users'],
             ]);
 
         $token = Token::withoutEvents(function () use ($client) {
