@@ -22,7 +22,6 @@ abstract class PassportTestCase extends TestCase
     {
         parent::setUp();
 
-        $this->allowed_scopes_column = config('passport-scopes.allowed_scopes_column');
 
         $this->artisan('migrate:fresh');
 
