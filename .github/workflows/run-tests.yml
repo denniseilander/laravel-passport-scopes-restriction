@@ -45,7 +45,7 @@ jobs:
 
       - name: Codeov
         if: ${{ github.actor != 'dependabot' }}
-        uses: codecov/codecov-action@v4.6.0
+        uses: codecov/codecov-action@v5.0.7
         with:
           fail_ci_if_error: true
           files: coverage/coverage.xml
