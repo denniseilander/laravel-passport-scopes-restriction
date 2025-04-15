@@ -2,6 +2,17 @@
 
 All notable changes to `laravel-passport-scopes-restriction` will be documented in this file.
 
+## 3.0.1 - 2025-04-15
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.1.0 to 2.2.0 by @dependabot in https://github.com/denniseilander/laravel-passport-scopes-restriction/pull/48
+* Bump codecov/codecov-action from 4.5.0 to 4.6.0 by @dependabot in https://github.com/denniseilander/laravel-passport-scopes-restriction/pull/49
+* Bump dependabot/fetch-metadata from 2.2.0 to 2.3.0 by @dependabot in https://github.com/denniseilander/laravel-passport-scopes-restriction/pull/54
+* Add laravel 12 support by @denniseilander in https://github.com/denniseilander/laravel-passport-scopes-restriction/pull/58
+
+**Full Changelog**: https://github.com/denniseilander/laravel-passport-scopes-restriction/compare/3.0.0...3.0.1
+
 ## 3.0.0 - 2024-07-13
 
 ### What's Changed
